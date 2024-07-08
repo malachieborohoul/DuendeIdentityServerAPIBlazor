@@ -1,0 +1,8 @@
+@page "/authentication/logout"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+<RemoteAuthenticatorView Action="logout">
+    <LogOutSucceeded>
+        @{NavManager.NavigateTo("/");}
+    </LogOutSucceeded>
+</RemoteAuthenticatorView>

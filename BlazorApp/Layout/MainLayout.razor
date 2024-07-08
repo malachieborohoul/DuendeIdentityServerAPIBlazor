@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inherits LayoutComponentBase
+<div class="page">
+    <div class="sidebar">
+        <NavMenu/>
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <span>
+                Hi,
+                <AuthorizeView>
+                    <Authorized>@context.User.Identity!.Name</Authorized>
+                    <NotAuthorized>Guest</NotAuthorized>
+                </AuthorizeView>
+            </span>
+            <MudSpacer />
+
+            <AuthorizeView>
+                <Authorized>
+                    <a class="text-red-600 font-bold ml-4" @onclick="BeginLogOut" href="javascript:void(0)">Logout</a>
+
+                </Authorized>
+            </AuthorizeView>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    bool _drawerOpen = true;
+
+    public void BeginLogOut()
+    {
+        NavManager.NavigateToLogout("authentication/logout");
+    }
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+}
